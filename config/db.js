@@ -9,14 +9,14 @@ const connectDB = async () => {
         });
 
         //thông báo 
-        console.log(`| Kết nối dữ liệu thành công ! |`);
-        console.log(`================================`);
+        console.log(`Kết nối dữ liệu thành công ! `);
+        console.log(`======================================`);
         console.log(`Morgan hoạt động ghi lại logger ...`);
         // console.log(
         //     `MongoDB is connected: ${conn.connection.host}`.white
         // );
     } catch (error) {
-        console.log(`ERROR: ${error.message}`.red.underline.bold);
+        console.log(`ERROR: ${error.message}`);
         process.exit(1);
     }
 };
