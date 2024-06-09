@@ -5,6 +5,7 @@ dotenv.config(); //Lấy giá trị env
 const morgan = require('morgan');
 const nhustudio = new phamvana();
 const ejs = require('ejs');
+const bodyParser = require('body-parser'); // lấy giá trị form nhập làm body
 /**
  * Kết nối cơ sở dữ liệu MongoDB bằng Mongoose
 */
@@ -36,14 +37,21 @@ nhustudio.listen(PORT, ()=>{
 */
 nhustudio.use(phamvana.static('public')); // Chỉ định thư mục public làm thư mục tĩnh cho trang.
 nhustudio.set('view engine','ejs'); // Khai báo engine cho ejs
+nhustudio.use(bodyParser.json());
+nhustudio.use(bodyParser.urlencoded({extended:true}));
 nhustudio.get('/',(req,res)=>{
     res.render('index');
 });   
 /**
  * Các route thành viên 
  */
-const registerUser = require('./route/userRoute.js');
-nhustudio.post('/users/register');              // Chuyển đến route đăng ký thành viên
+// nhustudio.post('/users/register',(req,res)=>{
+//     console.log(req.body);
+//     res.redirect('/');
+// })
+const registerUser = require('./controllers/userController.js');
+
+nhustudio.use('/users/register', registerUser);            // Chuyển đến route đăng ký thành viên
 /**
  * Tạo middleware xửa lý không tìm thấy trang
 */
