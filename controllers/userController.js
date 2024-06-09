@@ -35,22 +35,23 @@ const registerUser = asyncHandler(async (req, res) => {
         phone
     });
     
+    // Trả về kết quả đã đăng ký thành công,
     // if (user) {
-        //     res.status(201).json({
-            //         _id: user._id,
-            //         name: user.name,
-            //         email: user.email,
-            //         token: generate(user._id),
-            //         isAdmin: user.isAdmin,
-            //         address: user.address,
-            //         phone: user.phone
-            //     });
-            // } else {
-                //     res.stutus(403);
-                //     throw new Error("Invalid user ID | user ID không đúng!");
-                // }
-                res.redirect('/');
-                console.log('Đăng ký thành công');
+    //     res.status(201).json({
+    //         _id: user._id,
+    //         name: user.name,
+    //         email: user.email,
+    //         // token: generate(user._id), tạm thời chưa sử dụng
+    //         isAdmin: user.isAdmin,
+    //          address: user.address,
+    //         phone: user.phone
+    //     });
+    // } else {
+    //     res.stutus(403);
+    //     throw new Error("Invalid user ID | user ID không đúng!");
+    // }
+    res.redirect('/');
+    console.log('Đăng ký thành viên thành công');
 });
 
 module.exports = registerUser;
