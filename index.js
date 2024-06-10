@@ -6,6 +6,7 @@ const morgan = require('morgan');
 const nhustudio = new phamvana();
 const ejs = require('ejs');
 const bodyParser = require('body-parser'); // lấy giá trị form nhập làm body
+const phamvanaSession = require('express-session');
 /**
  * Kết nối cơ sở dữ liệu MongoDB bằng Mongoose
 */
@@ -32,6 +33,12 @@ nhustudio.listen(PORT, ()=>{
     console.log(`======================================`);
 });
 /**
+ * Tạo cooker cho trang
+ */
+nhustudio.use(phamvanaSession({
+        secret: 'keyboard cat'
+    }));
+/**
  * Tạo trang chủ với ejs
  * 30/5/2024
 */
@@ -45,13 +52,12 @@ nhustudio.get('/',(req,res)=>{
 /**
  * Các route thành viên 
  */
-// nhustudio.post('/users/register',(req,res)=>{
-//     console.log(req.body);
-//     res.redirect('/');
-// })
-const registerUser = require('./controllers/userController.js');
+
+const {registerUser, authUser} = require('./controllers/userController.js');
 
 nhustudio.use('/users/register', registerUser);            // Chuyển đến route đăng ký thành viên
+
+nhustudio.post('/users/login', authUser);
 /**
  * Tạo middleware xửa lý không tìm thấy trang
 */

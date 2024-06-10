@@ -54,4 +54,40 @@ const registerUser = asyncHandler(async (req, res) => {
     console.log('Đăng ký thành viên thành công');
 });
 
-module.exports = registerUser;
+/**
+ * Đăng nhập thành viên
+ */
+const authUser = asyncHandler(async (req, res) => {
+    console.log(req.body);
+    const {email, psw} = req.body;
+    //kiểm tra hôạt động của req.body
+    console.log('Kiểm tra đăng nhập như sau:');
+    console.log('Email: ' + email + ' và mật khẩu' + psw);
+    const user = await User.findOne({
+        email,
+    });
+    /**
+     * Kiểm tra điều kiện có email trong cơ sở dữ liệu không! 
+     * */
+    if(user){
+        console.log('Hên quá thấy email: '+ email + ' trong cơ sở dữ liệu!');
+    }else{
+        console.log('Không có email trong cơ sở dữ liệu!');
+    }
+    /**
+     * Kiểm tra 2 điều kiện
+     */
+    if(user && (await user.matchPassword(psw))){
+        console.log('Bạn đăng nhập thành công!');
+    }else{
+        console.log('Sai mật khẩu!');
+    }
+
+    res.redirect('/');
+});
+
+module.exports = {
+    registerUser,
+    authUser
+
+};

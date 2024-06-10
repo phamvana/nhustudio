@@ -44,14 +44,14 @@
 
 <!-- Đăng nhập -->
 <div id="login" class="modal">
-    <form class="modal-content animate" action="" method="post">
+    <form class="modal-content animate" action="/users/login" method="post">
         <div class="imgcontainer">
             <span onclick="document.getElementById('login').style.display='none'" class="close" title="Close Modal">&times;</span>
             <img src="assets/favicon-bg.png" alt="Avatar" class="avatar">
             </div>
             <div class="container">
-            <label for="uname"><b>Tên đăng nhập</b></label>
-            <input type="text" placeholder="Nhập tên thành viên" name="uname" required>
+            <label for="uname"><b>Email</b></label>
+            <input type="text" placeholder="Nhập email thành viên" name="email" required>
 
             <label for="psw"><b>Mật khẩu</b></label>
             <input type="password" placeholder="Nhập mật khẩu" name="psw" required>         
