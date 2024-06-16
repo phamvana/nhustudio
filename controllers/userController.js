@@ -58,11 +58,11 @@ const registerUser = asyncHandler(async (req, res) => {
  * Đăng nhập thành viên
  */
 const authUser = asyncHandler(async (req, res) => {
-    console.log(req.body);
+    // console.log(req.body);
     const {email, psw} = req.body;
     //kiểm tra hôạt động của req.body
-    console.log('Kiểm tra đăng nhập như sau:');
-    console.log('Email: ' + email + ' và mật khẩu: ' + psw);
+    // console.log('Kiểm tra đăng nhập như sau:');
+    // console.log('Email: ' + email + ' và mật khẩu: ' + psw);
     const user = await User.findOne({
         email,
     });
@@ -82,7 +82,10 @@ const authUser = asyncHandler(async (req, res) => {
         req.session.userId = user._id;
         req.session.username = user.name;
         req.session.userIsAdmin = user.isAdmin;
-        console.log('Session username = ' + req.session.username);
+        req.session.userAdress = user.address;
+        req.session.userPhone = user.phone;
+        
+        // console.log('Session username = ' + req.session.username);
     }else{
         console.log('Sai mật khẩu!');
     }
@@ -97,10 +100,16 @@ const logOut = asyncHandler(async(req, res) =>(
         res.redirect('/');
     })
 ));
-
+/**
+ * Thông tin user
+ */
+const userInfo = asyncHandler(async(req, res) =>(
+    res.redirect('/login/info')
+));
 module.exports = {
     registerUser,
     authUser,
-    logOut
+    logOut,
+    userInfo
 
 };
