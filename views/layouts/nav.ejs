@@ -15,18 +15,24 @@
                 <!-- Thành viên -->
                 <div class="d-flex ">
                     <ul class="navbar-nav me-auto mb-2 mb-lg-0 ms-lg-4">
-                        <li class="nav-item"><a onclick="document.getElementById('login').style.display='block'" style="width:auto;" class="nav-link" href="#!">Đăng nhập</a></li>
-                        <li class="nav-item"><a onclick="document.getElementById('register').style.display='block'" style="width:auto;" class="nav-link" href="#!">Đăng ký</a></li>
-                        <!-- <li class="nav-item dropdown">
-                           
-                            <a class="nav-link dropdown-toggle" id="navbarDropdown" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">Thành viên</a>
-                            <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                <li><a class="dropdown-item" href="#!">Thông tin</a></li>
-                                <li><hr class="dropdown-divider" /></li>
-                                <li><a class="dropdown-item" href="#!">Đổi mật khẩu</a></li>
-                                <li><a class="dropdown-item" href="#!">Đăng xuất</a></li>
-                            </ul>
-                        </li> -->
+                        <% if(loggedIn) { %>
+                            <li class="nav-item"><a class="nav-link" href="#!">Xin chào: </a></li>                            
+                            <li class="nav-item dropdown">
+                               
+                                <a class="nav-link dropdown-toggle" id="navbarDropdown" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                    <%= userName %></b></a>
+                                <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                    <li><a class="dropdown-item" href="#!">Thông tin</a></li>
+                                    <li><hr class="dropdown-divider" /></li>
+                                    <li><a class="dropdown-item" href="#!">Đổi mật khẩu</a></li>
+                                    <li><a class="dropdown-item" href="users/logout">Đăng xuất</a></li>
+                                </ul>
+                            </li>
+                            <% } %>
+                        <% if(!loggedIn) { %>
+                            <li class="nav-item"><a onclick="document.getElementById('login').style.display='block'" style="width:auto;" class="nav-link" >Đăng nhập</a></li>
+                            <li class="nav-item"><a onclick="document.getElementById('register').style.display='block'" style="width:auto;" class="nav-link" >Đăng ký</a></li>
+                        <% } %>
                     </ul>
                 
                 <!-- Giỏ hàng -->

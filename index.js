@@ -39,6 +39,18 @@ nhustudio.use(phamvanaSession({
         secret: 'keyboard cat'
     }));
 /**
+ * Tạo biến toàn cục LogIn
+ * Tạo Middware kiểm tra
+ * Kiểm tra xem user có đăng nhập chưa
+ */
+global.loggedIn = null;
+global.userName = null;
+nhustudio.use("*", (req, res,next)=>{
+    loggedIn = req.session.userId;
+    userName = req.session.username;
+    next();
+});
+/**
  * Tạo trang chủ với ejs
  * 30/5/2024
 */
@@ -53,11 +65,12 @@ nhustudio.get('/',(req,res)=>{
  * Các route thành viên 
  */
 
-const {registerUser, authUser} = require('./controllers/userController.js');
+const {registerUser, authUser, logOut} = require('./controllers/userController.js');
 
 nhustudio.use('/users/register', registerUser);            // Chuyển đến route đăng ký thành viên
 
 nhustudio.post('/users/login', authUser);
+nhustudio.get('/users/logout', logOut);
 /**
  * Tạo middleware xửa lý không tìm thấy trang
 */
