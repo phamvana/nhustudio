@@ -1,21 +1,15 @@
 /**
  * Thư viện express-async-handler
  */
-const asyncHandler = require("express-async-handler");
+import asyncHandler from "express-async-handler";
 
-const Product = require("../models/productModel.js");
-const { render } = require("ejs");
+import Product from "../models/productModel.js";
 
 /**
  * GET all products - Tất cả các sản phẩm 
  * GET /api/products
  * Phạm Văn Á thực hiện
  */
-const getAllProduct = asyncHandler(async (req,res) =>{
-  const products = await Product.find({});
-  
-  });
-
 const getProducts = asyncHandler(async (req, res) => {
   const pageSize = 8;
   const page = Number(req.query.pageNumber) || 1;
@@ -199,8 +193,7 @@ const getTopProducts = asyncHandler(async (req, res) => {
  * Phạm Văn Á thực hiện
  * Cập nhật 28/3/2024
  */
-module.exports = {
-  getAllProduct,
+export {
   getProducts,
   getProductById,
   getTopProducts,
