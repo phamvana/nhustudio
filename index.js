@@ -31,6 +31,7 @@ nhustudio.listen(PORT, ()=>{
     console.log(`======================================`);
     console.log(`PORT = ${PORT}`);
     console.log(`======================================`);
+    
 });
 /**
  * Tạo cooker cho trang
@@ -60,22 +61,36 @@ nhustudio.use(phamvana.static('public')); // Chỉ định thư mục public là
 nhustudio.set('view engine','ejs'); // Khai báo engine cho ejs
 nhustudio.use(bodyParser.json());
 nhustudio.use(bodyParser.urlencoded({extended:true}));
+/**
+ * Các route sản phẩm
+ */
+const {
+    getAllProduct,
+    getProducts,
+    getProductById,
+    getTopProducts,
+    deleteProduct,
+    createProduct,
+    updateProduct,
+    createProductReview,
+  } = require('./controllers/productController.js');
 nhustudio.get('/',(req,res)=>{
-    res.render('index');
+    res.render('index',getAllProduct);
+    // console.log(products);
 });   
 /**
  * Các route thành viên 
  * Sẽ phát triển thêm
  */
-const {registerUser, authUser, logOut, userInfo} = require('./controllers/userController.js');
+const {registerUser, 
+    authUser, 
+    logOut, 
+    userInfo
+} = require('./controllers/userController.js');
 nhustudio.use('/users/register', registerUser);            // Chuyển đến route đăng ký thành viên
 nhustudio.post('/users/login', authUser);
 nhustudio.get('/users/logout', logOut);
 nhustudio.get('/login/info', userInfo);
-
-/**
- * Các route sản phẩm
- */
 
 /**
  * Tạo middleware xửa lý không tìm thấy trang
