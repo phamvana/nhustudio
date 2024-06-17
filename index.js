@@ -49,7 +49,7 @@ nhustudio.use("*", (req, res,next)=>{
     userName = req.session.username;
     Admin = req.session.userIsAdmin;
     Address = req.session.userAdress;
-    Phone = req.session.userAdress;
+    Phone = req.session.userPhone;
     next();
 });
 /**
