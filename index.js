@@ -75,7 +75,7 @@ const {
     createProductReview,
   } = require('./controllers/productController.js');
 nhustudio.get('/',(req,res)=>{
-    res.render('index',getAllProduct);
+    res.render('index');
     // console.log(products);
 });   
 /**

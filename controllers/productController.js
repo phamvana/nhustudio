@@ -1,9 +1,9 @@
 /**
  * Thư viện express-async-handler
  */
-import asyncHandler from "express-async-handler";
+const asyncHandler = require("express-async-handler");
 
-import Product from "../models/productModel.js";
+const Product = require("../models/productModel.js");
 
 /**
  * GET all products - Tất cả các sản phẩm 
@@ -193,7 +193,7 @@ const getTopProducts = asyncHandler(async (req, res) => {
  * Phạm Văn Á thực hiện
  * Cập nhật 28/3/2024
  */
-export {
+module.exports = {
   getProducts,
   getProductById,
   getTopProducts,
