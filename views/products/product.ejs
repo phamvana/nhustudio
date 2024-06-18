@@ -1,8 +1,8 @@
 <section class="py-5">
-    <div class="title-main">SẢN PHẨM NỔI BẬT</div>
+    <div class="title-main">SẢN PHẨM - DỊCH VỤ PHỔ BIẾN TẠI NHƯ STUDIO</div>
     <div class="container px-0 px-lg-5 mt-2">
         <div class="row gx-4 gx-lg-5 row-cols-2 row-cols-md-3 row-cols-xl-4 justify-content-center">
-            <% for(var i = 0; i < 80; i++ ) { %>
+            <% getAllProducts.forEach((product) => { %>
             <div class="col mb-5">
                 <div class="card h-100">
                     <!-- Product image-->
@@ -11,18 +11,18 @@
                     <div class="card-body p-4">
                         <div class="text-center">
                             <!-- Product name-->
-                            <h5 class="fw-bolder">Khung ảnh <%= i %></h5>
+                            <h5 class="fw-bolder"><%= product.name %></h5>
                             <!-- Product price-->
-                            60.000 VNĐ
+                            <%= product.price %> VND
                         </div>
                     </div>
                     <!-- Product actions-->
                     <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
-                        <div class="text-center"><a class="btn btn-outline-dark mt-auto" href="#">Xem chi tiết</a></div>
+                        <div class="text-center"><a class="btn btn-outline-dark mt-auto" href="/productById/<%= product._id %>">Xem chi tiết</a></div>
                     </div>
                 </div>
             </div>
-            <% } %>
+            <% }) %>
             <!-- Hết 1 sp -->
         </div>
     </div>

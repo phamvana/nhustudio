@@ -4,9 +4,16 @@
 const asyncHandler = require("express-async-handler");
 
 const Product = require("../models/productModel.js");
-
 /**
- * GET all products - Tất cả các sản phẩm 
+ * kiểm tra sản phẩm
+ */
+const getAllProducts = asyncHandler(async (req, res) => {
+  const getAllProducts = await Product.find({});
+  res.render("index", { getAllProducts });
+  console.log(getAllProducts);
+});
+/**
+ * GET all products - Tất cả các sản phẩm
  * GET /api/products
  * Phạm Văn Á thực hiện
  */
@@ -16,11 +23,11 @@ const getProducts = asyncHandler(async (req, res) => {
 
   const keyword = req.query.keyword
     ? {
-      name: {
-        $regex: req.query.keyword,
-        $options: "i",
-      },
-    }
+        name: {
+          $regex: req.query.keyword,
+          $options: "i",
+        },
+      }
     : {};
   const count = await Product.countDocuments({ ...keyword });
   const products = await Product.find({ ...keyword })
@@ -35,7 +42,7 @@ const getProducts = asyncHandler(async (req, res) => {
 });
 
 /**
- * GET product by ID 
+ * GET product by ID
  * GET /api/products/:id
  * Phạm Văn Á thực hiện
  */
@@ -49,16 +56,13 @@ const getProductById = asyncHandler(async (req, res) => {
    * Ngược lại thì báo lỗi cho người dùng.
    */
   if (product) {
-    res.json(product);
-  } else {
-    res.status(404);
-    throw new Error("Product not found | Không tìm thấy sản phẩm");
+    res.render("productById", { product });
+    // res.json(product);
   }
 });
 
-
 /**
- * ADMIN - quản trị có quyền thực hiện 
+ * ADMIN - quản trị có quyền thực hiện
  * DELETE delete product
  * DELETE /api/products/:id
  * Phạm Văn Á thực hiện
@@ -80,7 +84,7 @@ const deleteProduct = asyncHandler(async (req, res) => {
 /**
  * Tạo mới 1 sản phẩm
  * ADMIN - quản trị có quyền
- * POST create product 
+ * POST create product
  * POST /api/products/
  * Phạm Văn Á thực hiện 28/3/2024
  */
@@ -103,7 +107,7 @@ const createProduct = asyncHandler(async (req, res) => {
 /**
  * ADMIN - quản trị có quyền
  * PUT update product
- * PUT /api/products/:id   
+ * PUT /api/products/:id
  * Phạm văn Á thực hiện
  */
 const updateProduct = asyncHandler(async (req, res) => {
@@ -194,6 +198,7 @@ const getTopProducts = asyncHandler(async (req, res) => {
  * Cập nhật 28/3/2024
  */
 module.exports = {
+  getAllProducts,
   getProducts,
   getProductById,
   getTopProducts,

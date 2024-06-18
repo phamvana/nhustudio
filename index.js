@@ -1,16 +1,16 @@
-const path = require('path');
-const phamvana = require('express');
-const dotenv = require('dotenv');
+const path = require("path");
+const phamvana = require("express");
+const dotenv = require("dotenv");
 dotenv.config(); //Lấy giá trị env
-const morgan = require('morgan');
+const morgan = require("morgan");
 const nhustudio = new phamvana();
-const ejs = require('ejs');
-const bodyParser = require('body-parser'); // lấy giá trị form nhập làm body
-const phamvanaSession = require('express-session');
+const ejs = require("ejs");
+const bodyParser = require("body-parser"); // lấy giá trị form nhập làm body
+const phamvanaSession = require("express-session");
 /**
  * Kết nối cơ sở dữ liệu MongoDB bằng Mongoose
-*/
-const connectDB = require('./config/db.js');
+ */
+const connectDB = require("./config/db.js");
 connectDB();
 /**
  *cổng hoạt động của chương trình
@@ -18,87 +18,90 @@ connectDB();
 const PORT = process.env.PORT || 4000;
 /**
  * Chạy server
-*/
-nhustudio.listen(PORT, ()=>{
-    console.clear();
-    console.log(`======================================`);
-    console.log(`Tiểu luận tốt nghiệp đại học`);
-    console.log(`Ngành: Công nghệ thông tin`);
-    console.log(`Đề tài: Xây dựng ứng dụng Như Studio`);
-    console.log(`GVHD: TS.Lâm Nhựt Khang`);
-    console.log(`Thực hiện: Phạm Văn Á`);
-    console.log(`MSSV: cm21v7x306`);
-    console.log(`======================================`);
-    console.log(`PORT = ${PORT}`);
-    console.log(`======================================`);
-    
+ */
+nhustudio.listen(PORT, () => {
+  console.clear();
+  console.log(`======================================`);
+  console.log(`Tiểu luận tốt nghiệp đại học`);
+  console.log(`Ngành: Công nghệ thông tin`);
+  console.log(`Đề tài: Xây dựng ứng dụng Như Studio`);
+  console.log(`GVHD: TS.Lâm Nhựt Khang`);
+  console.log(`Thực hiện: Phạm Văn Á`);
+  console.log(`MSSV: cm21v7x306`);
+  console.log(`======================================`);
+  console.log(`PORT = ${PORT}`);
+  console.log(`======================================`);
 });
 /**
  * Tạo cooker cho trang
  */
-nhustudio.use(phamvanaSession({
-        secret: 'keyboard cat'
-    }));
+nhustudio.use(
+  phamvanaSession({
+    secret: "keyboard cat",
+  })
+);
 /**
  * Tạo biến toàn cục LogIn
  * Tạo Middware kiểm tra
  * Kiểm tra xem user có đăng nhập chưa
  */
 global.loggedIn = null;
-nhustudio.use("*", (req, res,next)=>{
-    loggedIn = req.session.userId;
-    userName = req.session.username;
-    Admin = req.session.userIsAdmin;
-    Address = req.session.userAdress;
-    Phone = req.session.userPhone;
-    next();
+nhustudio.use("*", (req, res, next) => {
+  loggedIn = req.session.userId;
+  userName = req.session.username;
+  Admin = req.session.userIsAdmin;
+  Address = req.session.userAdress;
+  Phone = req.session.userPhone;
+  next();
 });
 /**
  * Tạo trang chủ với ejs
  * 30/5/2024
-*/
-nhustudio.use(phamvana.static('public')); // Chỉ định thư mục public làm thư mục tĩnh cho trang.
-nhustudio.set('view engine','ejs'); // Khai báo engine cho ejs
+ */
+nhustudio.use(phamvana.static("public")); // Chỉ định thư mục public làm thư mục tĩnh cho trang.
+nhustudio.set("view engine", "ejs"); // Khai báo engine cho ejs
 nhustudio.use(bodyParser.json());
-nhustudio.use(bodyParser.urlencoded({extended:true}));
+nhustudio.use(bodyParser.urlencoded({ extended: true }));
 /**
  * Các route sản phẩm
  */
 const {
-    getAllProduct,
-    getProducts,
-    getProductById,
-    getTopProducts,
-    deleteProduct,
-    createProduct,
-    updateProduct,
-    createProductReview,
-  } = require('./controllers/productController.js');
-nhustudio.get('/',(req,res)=>{
-    res.render('index');
-    // console.log(products);
-});   
+  getAllProducts,
+  getProducts,
+  getProductById,
+  getTopProducts,
+  deleteProduct,
+  createProduct,
+  updateProduct,
+  createProductReview,
+} = require("./controllers/productController.js");
+nhustudio.get("/", getAllProducts);
 /**
- * Các route thành viên 
+ * Chi tiết sản phẩm
+ */
+nhustudio.get("/productById/:id", getProductById);
+/**
+ * Các route thành viên
  * Sẽ phát triển thêm
  */
-const {registerUser, 
-    authUser, 
-    logOut, 
-    userInfo
-} = require('./controllers/userController.js');
-nhustudio.use('/users/register', registerUser);            // Chuyển đến route đăng ký thành viên
-nhustudio.post('/users/login', authUser);
-nhustudio.get('/users/logout', logOut);
-nhustudio.get('/login/info', userInfo);
+const {
+  registerUser,
+  authUser,
+  logOut,
+  userInfo,
+} = require("./controllers/userController.js");
+nhustudio.use("/users/register", registerUser); // Chuyển đến route đăng ký thành viên
+nhustudio.post("/users/login", authUser);
+nhustudio.get("/users/logout", logOut);
+nhustudio.get("/login/info", userInfo);
 
 /**
  * Tạo middleware xửa lý không tìm thấy trang
-*/
-const {notFound, errorHandler} = require('./middleware/errorMiddleware.js');
+ */
+const { notFound, errorHandler } = require("./middleware/errorMiddleware.js");
 // Lỗi khi đọc dữ liệu từ các route
 nhustudio.use(notFound);
 /**
  * 28/5/2024
  * Pham Van A
- */ 
+ */
