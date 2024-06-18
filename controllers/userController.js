@@ -104,7 +104,7 @@ const logOut = asyncHandler(async(req, res) =>(
  * Thông tin user
  */
 const userInfo = asyncHandler(async(req, res) =>(
-    res.redirect('//login/info')
+    res.redirect('/login/info')
 ));
 module.exports = {
     registerUser,
