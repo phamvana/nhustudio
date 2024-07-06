@@ -50,8 +50,6 @@ nhustudio.use("*", (req, res, next) => {
   loggedIn = req.session.userId;
   userName = req.session.username;
   Admin = req.session.userIsAdmin;
-  Address = req.session.userAdress;
-  Phone = req.session.userPhone;
   next();
 });
 /**
@@ -79,7 +77,7 @@ nhustudio.get("/", getAllProducts);
 /**
  * Chi tiết sản phẩm
  */
-nhustudio.get("/productById/:id", getProductById);
+nhustudio.get("/detail/:id", getProductById);
 /**
  * Các route thành viên
  * Sẽ phát triển thêm
@@ -93,7 +91,7 @@ const {
 nhustudio.use("/users/register", registerUser); // Chuyển đến route đăng ký thành viên
 nhustudio.post("/users/login", authUser);
 nhustudio.get("/users/logout", logOut);
-nhustudio.get("/login/info", userInfo);
+nhustudio.get("/users/info", userInfo);
 
 /**
  * Tạo middleware xửa lý không tìm thấy trang
