@@ -10,7 +10,7 @@ const Product = require("../models/productModel.js");
 const getAllProducts = asyncHandler(async (req, res) => {
   const getAllProducts = await Product.find({});
   res.render("index", { getAllProducts });
-  console.log(getAllProducts);
+  // console.log(getAllProducts);
 });
 /**
  * GET all products - Tất cả các sản phẩm

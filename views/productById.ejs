@@ -1,42 +1,45 @@
 <!DOCTYPE html>
 <html lang="en">
 <!-- Header Ejs-->
- <%- include("layouts/header"); %>
+<%- include("layouts/header"); %>
+<link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+<script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
+<script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
 <body>
     <!-- nav Ejs-->
     <%- include("layouts/nav"); %>
-    <%- include("layouts/stepbystep"); %>
-    <section class="py-5">
-        <div class="title-main">CHI TIẾT SẢN PHẨM - DỊCH VỤ</div>
-        <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
-            <div class="text-center"><a class="btn btn-outline-dark mt-auto" href="#">Thêm vào giỏ hàng</a></div>
-        </div>
-            <div class="container px-0 px-lg-5 mt-2">
-                <div class="col mb-5">
-                    <div class="card h-100">
-                        <!-- Product image-->
-                        <img class="card-img-top" src="../assets/img/phuchoi1.png" alt="khung ảnh" />
-                        <div class="card-body p-4">
-                            <div class="text-center">
-                                <!-- Product name-->
-                            <h5 class="fw-bolder"><%= product.name %></h5>
-                                <!-- Product details-->
-                            <%= product.description %>
-                            <!-- Product price-->
-                           <b><%= product.price %> VNĐ</b> 
-                        </div>
-                    <!-- </div> -->
-                <!-- Product actions-->
-                </div>
+    
+    <div class="container">
+        <div class="row">
+           <div class="col-xs-4 item-photo">
+                <!-- Product image-->
+                <img class="card-img-top" src="<%= product.image %>" alt="khung ảnh" />
             </div>
-                                <!-- Product actions-->
-        </div>
-                            </div>
-                        </div>
-                    </div>
+            <div class="col-xs-5" style="border:0px solid gray">
+                <!-- Datos del vendedor y titulo del producto -->
+                <h3><%= product.name %></h3>    
+                <!-- <h5 style="color:#337ab7">vendido por <a href="#">Samsung</a> · <small style="color:#337ab7">(5054 ventas)</small></h5> -->
+    
+                <!-- Precios -->
+                <h6 class="title-price"><small>PRECIO OFERTA</small></h6>
+                <h3>         
+                    <b><%= product.price %> VNĐ</b> 
+                </h3>         
+                <!-- Botones de compra -->
+                <div class="section" style="padding-bottom:20px;">
+                    <button class="btn btn-success"><span style="margin-right:20px" class="glyphicon glyphicon-shopping-cart" aria-hidden="true"></span> Thêm vào giỏ hàng</button>
+                    <h6><a href="#"><span class="glyphicon glyphicon-heart-empty" style="cursor:pointer;"></span> Agregar a lista de deseos</a></h6>
+                </div>                                        
+            </div>                              
+    
+            <div class="col-xs-9">
+                <div style="width:100%;border-top:1px solid silver">
+                    <%= product.description %>    
                 </div>
-            </section>
-        <!-- Footer-->
-        <%- include("layouts/footer"); %>
+            </div>		
+        </div>
+    </div>   
+    <!-- Footer-->
+    <%- include("layouts/footer"); %>
     </body>
 </html>
