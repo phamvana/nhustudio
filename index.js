@@ -91,6 +91,13 @@ const {
 nhustudio.use("/users/register", registerUser); // Chuyển đến route đăng ký thành viên
 nhustudio.post("/users/login", authUser);
 nhustudio.get("/users/logout", logOut);
+nhustudio.use("/users/info",(req, res, next) => {
+  email = req.session.email;
+  phone = req.session.userPhone;
+  diaChi = req.session.userAdress;
+  
+  next();
+});
 nhustudio.get("/users/info", userInfo);
 
 /**

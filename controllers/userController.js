@@ -75,6 +75,7 @@ const authUser = asyncHandler(async (req, res) => {
     console.log(user.name + " đăng nhập thành công!");
     req.session.userId = user._id;
     req.session.username = user.name;
+    req.session.email = user.email;
     req.session.userIsAdmin = user.isAdmin;
     req.session.userAdress = user.address;
     req.session.userPhone = user.phone;
