@@ -5,20 +5,31 @@
             <% getAllProducts.forEach((product) => { %>
             <div class="col mb-5">
                 <div class="card h-100">
+                    <!-- Product name-->
+                    <h5 class="fw-bolder text-center"><%= product.name %></h5>
                     <!-- Product image-->
                     <img class="card-img-top" src="<%= product.image %>" alt="khung ảnh" />
                     <!-- Product details-->
                     <div class="card-body p-4">
                         <div class="text-center">
-                            <!-- Product name-->
-                            <h5 class="fw-bolder"><%= product.name %></h5>
                             <!-- Product price-->
-                            <%= product.price %> VND
+                            <% if(product.category == "sản phẩm") {%> Sản phẩm giá: 
+                                <br>
+                               <b><%= product.price %> VND</b> 
+                               <!-- Product actions-->
+                               <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
+                                   <div class="text-center"><a class="btn btn-outline-dark mt-auto" href="/detail/<%= product._id %>">Xem chi tiết</a></div>
+                               </div>
+                            <% } %>
+                            <% if(product.category == "Dịch vụ") {%> Giá: 
+                                <br>
+                               <b><%= product.price %> VND</b> 
+                               <!-- Product actions-->
+                               <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
+                                   <div class="text-center"><a class="btn btn-outline-dark mt-auto" href="/detail/<%= product._id %>">Liên hệ tư vấn</a></div>
+                               </div>
+                            <% } %>
                         </div>
-                    </div>
-                    <!-- Product actions-->
-                    <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
-                        <div class="text-center"><a class="btn btn-outline-dark mt-auto" href="/detail/<%= product._id %>">Xem chi tiết</a></div>
                     </div>
                 </div>
             </div>
