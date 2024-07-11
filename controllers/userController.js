@@ -79,6 +79,7 @@ const authUser = asyncHandler(async (req, res) => {
     req.session.userIsAdmin = user.isAdmin;
     req.session.userAdress = user.address;
     req.session.userPhone = user.phone;
+    req.session.image = user.image;
 
     // console.log('Session username = ' + req.session.username);
   } else {

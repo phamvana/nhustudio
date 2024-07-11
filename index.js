@@ -95,11 +95,13 @@ nhustudio.use("/users/info",(req, res, next) => {
   email = req.session.email;
   phone = req.session.userPhone;
   diaChi = req.session.userAdress;
-  
+  pic = req.session.image;
   next();
 });
 nhustudio.get("/users/info", userInfo);
-
+nhustudio.get("/about", (req, res)=>{
+  res.render("about");
+});
 /**
  * Tạo middleware xửa lý không tìm thấy trang
  */
